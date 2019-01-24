@@ -17,26 +17,18 @@ class BackToCart {
      * Adds a button to RAMP's side menu
      */
     activateButton(): void {
-        (<any>window).RV.getMap(this.api.id)
-            .getCurrentLang()
-            .then(lang => {
-                this.api.mapI.addPluginButton(BackToCart.prototype.translations[lang], this.onMenuItemClick());
-            });
+        this.api.mapI.addPluginButton(BackToCart.prototype.translations[this._RV.getCurrentLang()], this.onMenuItemClick());
     }
 
     /**
      * Returns a promise that resolves with the backToCart URL
      */
-    getCatalogueUrl(): Promise<string> {
+    getCatalogueUrl(): string {
         if (!this.template) {
             console.warn('<Back to Cart> Trying to get URL before template is set');
             return;
         }
-        return (<any>window).RV.getMap(this.api.id)
-            .getRcsLayerIDs()
-            .then((keys: string[]) => {
-                return this.template.replace('{RV_LAYER_LIST}', keys.toString());
-            });
+        return this.template.replace('{RV_LAYER_LIST}', this._RV.getRcsLayerIDs().toString());
     }
 
     /**
@@ -45,10 +37,8 @@ class BackToCart {
     onMenuItemClick(): () => void {
         return () => {
             // save bookmark in local storage so it is restored when user returns
-            sessionStorage.setItem(this.api.id, (<any>window).RV.getMap(this.api.id).getBookmark());
-            this.getCatalogueUrl().then(url => {
-                window.location.href = url;
-            });
+            sessionStorage.setItem(this.api.id, this._RV.getBookmark());
+            window.location.href = this.getCatalogueUrl();
         };
     }
 
@@ -65,6 +55,7 @@ class BackToCart {
 
 interface BackToCart {
     api: any;
+    _RV: any;
     template: string;
     translations: any;
 }
