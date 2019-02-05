@@ -1,4 +1,4 @@
-import { GridOptions, GridApi } from './node_modules/ag-grid-community/main';
+import { GridOptions, GridApi } from 'ag-grid-community';
 import { take } from 'rxjs/internal/operators/take';
 import { PanelManager } from './panel-manager';
 import { DETAILS_TEMPLATE, ZOOM_TEMPLATE } from './templates';
@@ -12,7 +12,7 @@ const DATE_TYPE = 'esriFieldTypeDate';
 const TEXT_TYPE = 'esriFieldTypeString';
 
 class TableBuilder {
-    intention = 'table';
+    feature = 'table';
     attributeHeaders: any;
 
     init(mapApi: any) {
