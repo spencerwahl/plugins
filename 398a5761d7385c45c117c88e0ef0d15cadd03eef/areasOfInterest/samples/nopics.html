@@ -21,9 +21,9 @@
     </body>
     <script>
         $('head').append(
-            $('<link rel="stylesheet" type="text/css" />').attr('href', 'http://fgpv.cloudapp.net/demo/v3/prod/rv-styles.css')
+            $('<link rel="stylesheet" type="text/css" />').attr('href', 'http://fgpv.cloudapp.net/demo/v3/prod/plugins/9c1ae13439892ec48ac1e00dde710b78c19d70b1/rv-styles.css')
         );
-        $.getScript('../../../rv-main.js', function() {
+        $.getScript('../../../plugins/9c1ae13439892ec48ac1e00dde710b78c19d70b1/rv-main.js', function() {
             $('body').append(`
         <div id="fgpmap" style="height: 700px; display:flex;" rv-langs='["en-CA", "fr-CA"]' rv-service-endpoint="http://section917.cloudapp.net:8000/" rv-plugins="areasOfInterest"></div>
         `);
